@@ -100,7 +100,7 @@ public final class TextMask {
         if (!keepMask) {
             return true;
         }
-        for (int i = 0; i <= mask.length(); i++) {
+        for (int i = 0; i < mask.length(); i++) {
             if (mask.charAt(i) == maskCharacter) {
                 if (!validCharacter.is(value.charAt(i))) {
                     return false;
