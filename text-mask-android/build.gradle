@@ -47,7 +47,7 @@ afterEvaluate {
                 from components.release
                 groupId "br.dev.dig.text.mask"
                 version vName
-                artifactId "android"
+                artifactId "text-mask-android"
                 pom { pom ->
                     //noinspection GroovyAssignabilityCheck
                     applyPom(pom, "Simple Mask Android", "Apply TextMask to Android EditText")

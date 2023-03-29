@@ -18,5 +18,5 @@ include ":text-mask"
 def isAndroidEnabled = !(new File(rootDir, "disable-android.gradle")).exists()
 if(isAndroidEnabled){
     include ":app"
-    include ":android"
+    include ":text-mask-android"
 }
