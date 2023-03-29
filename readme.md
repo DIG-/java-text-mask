@@ -1,7 +1,7 @@
 Simple Text Mask for Java and Android
 ==================================
-[![AppVeyor](https://img.shields.io/appveyor/build/DIG-/java-text-mask/main?logo=appveyor&logoColor=dddddd)](https://ci.appveyor.com/project/DIG-/java-text-mask/branch/main)
-[![AppVeyor tests](https://img.shields.io/appveyor/tests/DIG-/java-text-mask/main?logo=appveyor&logoColor=dddddd)](https://ci.appveyor.com/project/DIG-/java-text-mask/branch/main)
+[![AppVeyor](https://img.shields.io/appveyor/build/DIG-/java-text-mask/master?logo=appveyor&logoColor=dddddd)](https://ci.appveyor.com/project/DIG-/java-text-mask/branch/master)
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/DIG-/java-text-mask/master?logo=appveyor&logoColor=dddddd)](https://ci.appveyor.com/project/DIG-/java-text-mask/branch/master)
 [![Maven Central](https://img.shields.io/maven-central/v/br.dev.dig.text.mask/text-mask?label=maven)](https://central.sonatype.com/search?q=br.dev.dig.text.mask)
 [![License](https://img.shields.io/static/v1?label=license&message=CC%20BY-ND%204.0&color=blue)](https://creativecommons.org/licenses/by-nd/4.0/)
 
