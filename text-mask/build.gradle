@@ -1,0 +1,59 @@
+plugins {
+    id "java-library"
+    id "maven-publish"
+    id "signing"
+}
+apply from: "$rootDir/pom.gradle"
+
+// ==================================
+// Patch
+def patch = 0
+// ==================================
+
+version versions.mask.pkg + patch
+group "br.dev.dig.text.mask"
+java {
+    withSourcesJar()
+    sourceCompatibility = versions.java
+    targetCompatibility = versions.java
+}
+test {
+    useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        //noinspection GroovyAssignabilityCheck
+        java(MavenPublication) {
+            //noinspection GroovyAssignabilityCheck
+            from components.java
+            pom { pom ->
+                //noinspection GroovyAssignabilityCheck
+                applyPom(pom, "Simple Text Mask", "Apply/remove mask from text")
+            }
+        }
+    }
+    repositories {
+        if (deploy.central.enabled) {
+            maven {
+                name = "Central"
+                url = "https://s01.oss.sonatype.org/content/repositories/releases/"
+                credentials {
+                    username = deploy.central.username
+                    password = deploy.central.password
+                }
+            }
+        }
+    }
+    if (deploy.signing.enabled) {
+        signing {
+            useInMemoryPgpKeys((String) deploy.signing.key_id, (String) deploy.signing.secret, (String) deploy.signing.password)
+            sign publishing.publications.java
+        }
+    }
+}
+
+dependencies {
+    api "org.jetbrains:annotations:20.1.0"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+}

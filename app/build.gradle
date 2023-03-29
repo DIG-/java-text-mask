@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace "br.dev.dig.text.mask.sample"
-    compileSdk 33
+    compileSdk versions.android.compile
 
     defaultConfig {
         applicationId "br.dev.dig.text.mask.sample"
-        minSdk 21
-        targetSdk 33
+        minSdk versions.android.minimum
+        targetSdk versions.android.target
         versionCode 1
         versionName "1.0"
     }
@@ -22,16 +22,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility versions.java
+        targetCompatibility versions.java
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = versions.java
     }
 }
 
 dependencies {
 
+    implementation project(":text-mask")
     implementation "androidx.core:core-ktx:1.9.0"
     implementation "androidx.appcompat:appcompat:1.6.1"
     implementation "com.google.android.material:material:1.8.0"

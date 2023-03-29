@@ -13,5 +13,9 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Text Mask"
-include ":app"
-include ":mask"
+include ":text-mask"
+
+def isAndroidEnabled = !(new File(rootDir, "disable-android.gradle")).exists()
+if(isAndroidEnabled){
+    include ":app"
+}
