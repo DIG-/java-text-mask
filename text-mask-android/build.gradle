@@ -1,0 +1,80 @@
+plugins {
+    id "com.android.library"
+    id "maven-publish"
+    id "signing"
+}
+apply from: "$rootDir/pom.gradle"
+
+// ==================================
+// Patch
+def patch = 0
+// ==================================
+
+def vName = versions.mask.pkg + patch
+android {
+    namespace "br.dev.dig.text.mask"
+    compileSdk versions.android.compile
+
+    defaultConfig {
+        minSdk versions.android.minimum
+        targetSdk versions.android.target
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            //noinspection GroovyAssignabilityCheck
+            android(MavenPublication) {
+                //noinspection GroovyAssignabilityCheck
+                from components.release
+                groupId "br.dev.dig.text.mask"
+                version vName
+                artifactId "text-mask-android"
+                pom { pom ->
+                    //noinspection GroovyAssignabilityCheck
+                    applyPom(pom, "Simple Mask Android", "Apply TextMask to Android EditText")
+                }
+            }
+        }
+        repositories {
+            if (deploy.central.enabled) {
+                maven {
+                    name = "Central"
+                    url = "https://s01.oss.sonatype.org/content/repositories/releases/"
+                    credentials {
+                        username = deploy.central.username
+                        password = deploy.central.password
+                    }
+                }
+            }
+        }
+        if (deploy.signing.enabled) {
+            signing {
+                useInMemoryPgpKeys((String) deploy.signing.key_id, (String) deploy.signing.secret, (String) deploy.signing.password)
+                sign publishing.publications.android
+            }
+        }
+    }
+}
+
+dependencies {
+    api project(":text-mask")
+}
