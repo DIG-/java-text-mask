@@ -44,7 +44,7 @@ public final class TextMaskTextWatcher implements TextWatcher {
         isChanging = true;
         // Reset InputFilters
         final InputFilter[] filters = text.getFilters();
-        text.setFilters(null);
+        text.setFilters(new InputFilter[]{});
 
         // Apply mask
         final CharSequence formatted = mask.format(text);

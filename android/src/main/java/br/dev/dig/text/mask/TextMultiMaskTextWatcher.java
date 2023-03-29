@@ -96,7 +96,7 @@ public class TextMultiMaskTextWatcher implements TextWatcher {
     private void format(@NotNull final Editable text) {
         // Reset InputFilters
         final InputFilter[] filters = text.getFilters();
-        text.setFilters(null);
+        text.setFilters(new InputFilter[]{});
 
         // Remove current mask
         final CharSequence raw = mask.unformat(text);
