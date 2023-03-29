@@ -11,11 +11,11 @@ public final class TextMask {
     }
 
     @NotNull
-    private final CharSequence mask;
-    private final char maskCharacter;
-    private final boolean keepMask;
+    final CharSequence mask;
+    final char maskCharacter;
+    final boolean keepMask;
     @NotNull
-    private final IsValidCharacter validCharacter;
+    final IsValidCharacter validCharacter;
 
     public TextMask(@NotNull final CharSequence mask, final char maskCharacter, final boolean keepMask, @NotNull final IsValidCharacter validCharacter) {
         //noinspection ConstantConditions
