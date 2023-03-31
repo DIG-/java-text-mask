@@ -127,6 +127,16 @@ public class TextMultiMaskTextWatcher implements TextWatcher {
         throw new IndexOutOfBoundsException("Can not found TextMask for \"" + text + "\"");
     }
 
+    @Override
+    @NotNull
+    public String toString() {
+        return "TextMultiMaskTextWatcher(" +
+                "editText=" + editText +
+                ", options=" + options +
+                ", mask=" + mask +
+                ')';
+    }
+
     private int findCursorPosition(@NotNull final Editable text, final int start) {
         if (text.length() == 0) return start;
         int position = start;
