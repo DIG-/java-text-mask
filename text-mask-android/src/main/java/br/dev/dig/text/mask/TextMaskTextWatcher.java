@@ -84,6 +84,15 @@ public final class TextMaskTextWatcher implements TextWatcher {
         return mask.unformat(editText.getText());
     }
 
+    @Override
+    @NotNull
+    public String toString() {
+        return "TextMaskTextWatcher(" +
+                "editText=" + editText +
+                ", mask=" + mask +
+                ')';
+    }
+
     private int findCursorPosition(@NotNull final Editable text, final int start) {
         if (text.length() == 0) return start;
         int position = start;
