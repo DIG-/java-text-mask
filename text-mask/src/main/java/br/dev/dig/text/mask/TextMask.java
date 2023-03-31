@@ -138,4 +138,15 @@ public final class TextMask {
         return builder;
     }
 
+    @Override
+    @NotNull
+    public String toString() {
+        return "TextMask(" +
+                "mask=" + mask +
+                ", maskCharacter=" + maskCharacter +
+                ", keepMask=" + keepMask +
+                ", validCharacter=" + validCharacter +
+                ')';
+    }
+
 }
