@@ -9,6 +9,8 @@ import android.widget.EditText;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 public class TextMultiMaskTextWatcher implements TextWatcher {
 
     @FunctionalInterface
@@ -65,6 +67,10 @@ public class TextMultiMaskTextWatcher implements TextWatcher {
         this.editText = editText;
         this.options = options;
         this.mask = getMaskFor("");
+    }
+
+    public TextMultiMaskTextWatcher(@NotNull final EditText editText, @NotNull final Option... options) {
+        this(editText, Arrays.asList(options));
     }
 
     @Override
