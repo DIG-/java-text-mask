@@ -18,9 +18,9 @@ public class TextMultiMaskTextWatcher implements TextWatcher {
 
     public static class Option {
         @NotNull
-        public final Condition condition;
-        @NotNull
         public final TextMask mask;
+        @NotNull
+        public final Condition condition;
 
         public Option(@NotNull final TextMask mask, @NotNull final Condition condition) {
             //noinspection ConstantConditions
@@ -30,6 +30,15 @@ public class TextMultiMaskTextWatcher implements TextWatcher {
 
             this.mask = mask;
             this.condition = condition;
+        }
+
+        @Override
+        @NotNull
+        public String toString() {
+            return "Option(" +
+                    "mask=" + mask +
+                    ", condition=" + condition +
+                    ')';
         }
     }
 
