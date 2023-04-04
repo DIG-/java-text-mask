@@ -19,5 +19,6 @@ class MainActivity : AppCompatActivity() {
             TextMultiMaskTextWatcher.Option(TextMask("## ### ##")) { it.length < 8 },
             TextMultiMaskTextWatcher.Option(TextMask("##.##-####")) { it.length >= 8 },
         )).insert()
+        TextMaskTextWatcher(binding.mainCustom, TextMask("!##-###==####")).insert()
     }
 }
