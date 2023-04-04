@@ -50,11 +50,37 @@ public final class TextMaskTextWatcher implements TextWatcher {
         final CharSequence formatted = mask.format(text);
         final int previousLength = text.length();
         final int currentLength = formatted.length();
+        final CharSequence previous = text.subSequence(0, previousLength);
+        final int previousSelection = editText.getSelectionStart();
         text.replace(0, previousLength, formatted, 0, currentLength);
+        final int currentSelection = editText.getSelectionStart();
 
         // Update cursor
-        if (currentLength < previousLength) {
-            editText.setSelection(findCursorPosition(text, editText.getSelectionStart()));
+        if (currentSelection < previousSelection) {
+            if (mask.keepMask && previousSelection > 0 && previousSelection < currentLength) {
+                editText.setSelection(findCursorPosition(text, previousSelection) - 1);
+            } else if (previousSelection <= currentLength) {
+                editText.setSelection(previousSelection);
+            }
+        } else if (currentSelection == previousSelection) {
+            if (currentSelection != 0) {
+                int i = currentSelection - 1;
+                if (mask.mask.charAt(i) != mask.maskCharacter && mask.mask.charAt(i) != previous.charAt(i)) {
+                    editText.setSelection(findCursorPosition(text, i));
+                }
+            }
+        } else {
+            if (currentSelection >= mask.mask.length() && mask.keepMask) {
+                int i = currentLength - 1;
+                for (; i > 0; i--) {
+                    if (mask.mask.charAt(i) != text.charAt(i)) {
+                        break;
+                    }
+                }
+                editText.setSelection(i + 1);
+            } else {
+                editText.setSelection(findCursorPosition(text, previousSelection));
+            }
         }
 
         // Restore InputFilters
@@ -94,16 +120,17 @@ public final class TextMaskTextWatcher implements TextWatcher {
     }
 
     private int findCursorPosition(@NotNull final Editable text, final int start) {
-        if (text.length() == 0) return start;
-        int position = start;
-        for (int i = start; i < mask.mask.length(); i++) {
-            if (mask.mask.charAt(i) == mask.maskCharacter) {
+        int i = start;
+        for (; i < mask.mask.length(); i++) {
+            if (i >= text.length()) {
                 break;
             }
-            position++;
+            if (mask.mask.charAt(i) == mask.maskCharacter) {
+                i++;
+                break;
+            }
         }
-        position++;
-        return Math.min(position, text.length());
+        return i;
     }
 
 }
