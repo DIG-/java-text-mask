@@ -114,6 +114,7 @@ public final class TextMask {
         return true;
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     @NotNull
     public CharSequence unformat(@Nullable final CharSequence value) {
         if (value == null || value.length() == 0) {
