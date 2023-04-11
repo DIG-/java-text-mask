@@ -13,12 +13,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        TextMaskTextWatcher(binding.mainCard, TextMask("#### #### #### ####")).insert()
+        TextMaskTextWatcher(binding.mainCard, TextMask("#### #### #### ####")).insert().update()
         TextMaskTextWatcher(binding.mainDate, TextMask("____-__-__", '_', true)).insert()
         TextMultiMaskTextWatcher(binding.mainMulti, listOf(
             TextMultiMaskTextWatcher.Option(TextMask("## ### ##")) { it.length < 8 },
             TextMultiMaskTextWatcher.Option(TextMask("##.##-####")) { it.length >= 8 },
-        )).insert()
+        )).insert().update()
         TextMaskTextWatcher(binding.mainCustom, TextMask("!##-###==####")).insert()
     }
 }
